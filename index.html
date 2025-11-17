@@ -655,6 +655,134 @@
             border-top: 1px solid rgba(255,255,255,0.1);
         }
 
+        /* NUEVOS ESTILOS PARA EL LIBRO INTERACTIVO */
+        .book-container {
+            position: relative;
+            max-width: 900px;
+            margin: 40px auto;
+            perspective: 1500px;
+        }
+
+        .book {
+            position: relative;
+            width: 100%;
+            height: 500px;
+            transform-style: preserve-3d;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0;
+            left: 0;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 5px;
+            padding: 30px;
+            overflow-y: auto;
+            backface-visibility: hidden;
+            transform-origin: left center;
+            transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .page-front {
+            z-index: 2;
+        }
+
+        .page-back {
+            transform: rotateY(180deg);
+            z-index: 1;
+        }
+
+        .page.flipped {
+            transform: rotateY(-180deg);
+        }
+
+        .page.flipped .page-front {
+            z-index: 1;
+        }
+
+        .page.flipped .page-back {
+            z-index: 2;
+        }
+
+        .page-number {
+            position: absolute;
+            bottom: 15px;
+            right: 20px;
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .page-content {
+            flex: 1;
+            padding: 10px 0;
+        }
+
+        .page-image {
+            width: 100%;
+            margin: 20px 0;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .page-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .image-caption {
+            text-align: center;
+            font-style: italic;
+            color: #666;
+            margin-top: 5px;
+            font-size: 0.9rem;
+        }
+
+        .book-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 30px;
+            gap: 20px;
+        }
+
+        .book-nav {
+            background-color: #2c5530;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .book-nav:hover {
+            background-color: #1e3a23;
+        }
+
+        .book-nav:disabled {
+            background-color: #cccccc;
+            cursor: not-allowed;
+        }
+
+        .page-indicator {
+            font-weight: bold;
+            color: #2c5530;
+            min-width: 100px;
+            text-align: center;
+        }
+
         /* Responsive */
         @media screen and (max-width: 768px) {
             header h1 {
@@ -688,6 +816,10 @@
             .comparison-main {
                 height: 300px;
             }
+
+            .book {
+                height: 600px;
+            }
         }
     </style>
 </head>
@@ -698,11 +830,11 @@
             <div class="logo">La Huaca del Bosque</div>
             <ul class="nav-links">
                 <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#reportaje">Reportaje</a></li>
+                <li><a href="#cronologia">Cronología</a></li>
                 <li><a href="#comic">Cómic Educativo</a></li>
                 <li><a href="#expertos">Voces Expertas</a></li>
                 <li><a href="#galeria">Galería</a></li>
-                <li><a href="#revista">Revista</a></li>
+                <li><a href="#reportaje">Reportaje</a></li>
                 <li><a href="#creditos">Créditos</a></li>
                 <li><a href="#datos">Datos</a></li>
             </ul>
@@ -716,8 +848,8 @@
         <div class="scroll-down">↓</div>
     </header>
 
-    <!-- Reportaje / Scrollytelling -->
-    <section id="reportaje">
+    <!-- Cronologia / Scrollytelling -->
+    <section id="cronologia">
         <div class="container">
             <h2>La Cronología del Descubrimiento y Conflicto</h2>
             <p>Un recorrido histórico sobre los hechos más relevantes relacionados con la Huaca El Bosque, desde su reconocimiento patrimonial hasta las amenazas más recientes.</p>
@@ -727,7 +859,7 @@
             <div class="timeline-item">
                 <div class="timeline-content">
                 <h3>1986</h3>
-                <p>El predio de la Huaca figura inscrito en la ficha registral N° 6347 a favor de la Cooperativa “El Bosque”.</p>
+                <p>El predio de la Huaca figura inscrito en la ficha registral N° 6347 a favor de la Cooperativa "El Bosque".</p>
                 <p><strong>Fuente:</strong> Arqueología del Perú (2025)</p>
                 <div class="comic-illustration">
                     <img src="https://images.unsplash.com/photo-1581091870634-2c5f65d48d21?auto=format&fit=crop&w=2070&q=80" alt="Ilustración Huaca El Bosque 1986">
@@ -739,7 +871,7 @@
             <div class="timeline-item">
                 <div class="timeline-content">
                 <h3>1993</h3>
-                <p>La Huaca “El Bosque” es reconocida como Patrimonio Cultural de la Nación mediante Resolución N° 032-1993/INC.</p>
+                <p>La Huaca "El Bosque" es reconocida como Patrimonio Cultural de la Nación mediante Resolución N° 032-1993/INC.</p>
                 <p><strong>Fuente:</strong> RPP (2025), El Comercio (2025)</p>
                 <div class="comic-illustration">
                     <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=2070&q=80" alt="Declaración de Patrimonio 1993">
@@ -763,7 +895,7 @@
             <div class="timeline-item">
                 <div class="timeline-content">
                 <h3>Noviembre 2013</h3>
-                <p>La directiva de la Cooperativa “El Bosque” inicia una demanda de reivindicación ante el Cuarto Juzgado Civil al descubrir un plan de invasión.</p>
+                <p>La directiva de la Cooperativa "El Bosque" inicia una demanda de reivindicación ante el Cuarto Juzgado Civil al descubrir un plan de invasión.</p>
                 <p><strong>Fuente:</strong> Arqueología del Perú (2025)</p>
                 <div class="comic-illustration">
                     <img src="https://images.unsplash.com/photo-1522205408450-add114ad53fe?auto=format&fit=crop&w=2070&q=80" alt="Demanda de reivindicación 2013">
@@ -957,20 +1089,156 @@
         </div>
     </section>
 
-    <!-- Revista -->
-    <section id="revista">
+    <!-- Reportaje -->
+    <section id="reportaje">
         <div class="container">
-            <h2>Revista "Mirada Alterna"</h2>
+            <h2>Reportaje "Guerra por el patrimonio"</h2>
             <p>Explora nuestra edición especial dedicada al patrimonio cultural y la conservación.</p>
             
             <div class="magazine-container">
                 <div class="magazine-cover">
-                    <img src="https://via.placeholder.com/300x400/2c5530/ffffff?text=REVISTA+MIRADA+ALTERNA" alt="Portada revista Mirada Alterna">
+                    <img src="https://via.placeholder.com/300x400/2c5530/ffffff?text=REVISTA+MIRADA+ALTERNA" alt="Guerra por el patrimonio">
                 </div>
                 <div class="magazine-info">
-                    <h3>Edición Especial: Patrimonio en Peligro</h3>
+                    <h3>Edición Especial: Guerra por el patrimonio</h3>
                     <p>Esta edición presenta un análisis profundo sobre los desafíos que enfrentan los sitios arqueológicos en el Perú contemporáneo, con un enfoque especial en La Huaca del Bosque.</p>
-                    <a href="#" class="btn">Leer edición completa</a>
+                    <a href="#" class="btn" id="open-book">Leer reportaje</a>
+                </div>
+            </div>
+            
+            <!-- Libro interactivo para el reportaje -->
+            <div class="book-container" id="book-container" style="display: none;">
+                <div class="book" id="book">
+                    <!-- Página 1 (Front y Back) -->
+                    <div class="page" id="page1">
+                        <div class="page-front">
+                            <div class="page-content">
+                                <h3>Guerra por el patrimonio</h3>
+                                <p>La Huaca El Bosque es el único vestigio arqueológico ubicado en el casco urbano de Piura. Hoy, se encuentra en estado crítico, utilizado como botadero y estacionamiento de maquinaria pesada, ignorando que allí se encuentra un patrimonio cultural de la nación (nombrado así desde 1993 por el Ministerio de Cultura).</p>
+                                <div class="page-image">
+                                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Huaca El Bosque">
+                                    <div class="image-caption">La Huaca El Bosque en su estado actual</div>
+                                </div>
+                                <p>Una reciente visita al lugar revela que: bajo al menos dos metros de arena y escombros se esconden dos pirámides poligonales y cerámica de tipo ceremonial, herencia de las culturas Cupisnique, Vicús y Tallán.</p>
+                            </div>
+                            <div class="page-number">1</div>
+                        </div>
+                        <div class="page-back">
+                            <div class="page-content">
+                                <h3>Hallazgos arqueológicos</h3>
+                                <p>Este hallazgo, confirmado por la única arqueóloga que ha realizado excavaciones en la zona, Rosa Palacios, revela la falta de protección por parte de las autoridades competentes sobre este predio cultural intangible. Palacios, en su histórica excavación y posteriores cateos realizados desde 1986, en representación del Instituto Nacional de Cultural, hoy Ministerio de Cultura, revela la situación histórica, legal y patrimonial de la Huaca el Bosque.</p>
+                                <div class="page-image">
+                                    <img src="https://images.unsplash.com/photo-1581091870634-2c5f65d48d21?auto=format&fit=crop&w=2070&q=80" alt="Excavaciones arqueológicas">
+                                    <div class="image-caption">Trabajos de excavación en la zona</div>
+                                </div>
+                                <p>Según Palacios, el valor de este sitio arqueológico revela un testimonio histórico de diversas ocupaciones milenarias. Los retazos de cerámica del tipo ceremonial y administrativo encontrados en el sitio durante su excavación, exhiben la característica del "paleteado", lo que confirmaría una cronología que expone la presencia en el sitio de las culturas Cupisnique, Vicús y Tallán, además de otros vestigios de tipo Incaico y español.</p>
+                                <p class="source">Extraído del libro "Historia de Castilla".</p>
+                            </div>
+                            <div class="page-number">2</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Página 2 (Front y Back) -->
+                    <div class="page" id="page2">
+                        <div class="page-front">
+                            <div class="page-content">
+                                <h3>Respaldos académicos</h3>
+                                <p>Esta compleja historia es respaldada por el Dr. César Astuhuaman, arqueólogo de la Dirección Regional de Comercio Exterior y Turismo. El Dr. Astuhuamán cita y concuerda con las estructuras descritas por Palacios en su estudio de 1986.</p>
+                                <div class="page-image">
+                                    <img src="https://images.unsplash.com/photo-1529333166437-7750a6dd5a70?auto=format&fit=crop&w=2070&q=80" alt="Dr. César Astuhuaman">
+                                    <div class="image-caption">Dr. César Astuhuaman, arqueólogo</div>
+                                </div>
+                                <blockquote style="background-color: #f5f5f5; padding: 15px; border-left: 4px solid #2c5530; margin: 20px 0;">
+                                    "El sitio arqueológico Huaca el Bosque fue delimitado a partir de una prospección arqueológica en 21 hectáreas y en 13 unidades de excavación realizadas por Rosa Palacios y Juan Morales en 1986. Los resultados fueron publicados en 1992 por Luis Chaparro y Antonio Murga con el título 'Huaca el Bosque'."
+                                </blockquote>
+                            </div>
+                            <div class="page-number">3</div>
+                        </div>
+                        <div class="page-back">
+                            <div class="page-content">
+                                <h3>Estructuras descritas</h3>
+                                <p>El sitio estaba conformado por dos montículos arquitectónicos rodeados de áreas planas. El Montículo A se localizaba al Sur y fue elaborado con arena fina. El montículo B se localizaba al norte, de mayor altura que A, fue construido con tierra. En ambos montículos se registraron estructuras en forma de U alrededor de 1m de lado, en el centro de una estructura se registraron vasijas enteras.</p>
+                                <div class="page-image">
+                                    <img src="https://images.unsplash.com/photo-1604328698692-f76ea9498e76?auto=format&fit=crop&w=2070&q=80" alt="Estructuras de la Huaca">
+                                    <div class="image-caption">Recreación de las estructuras encontradas</div>
+                                </div>
+                                <p>Los dos montículos forman una elección orientada de suroeste a noreste, a sus costados se definen espacios llanos. El material cerámico, registrado durante la prospección y excavaciones corresponde a las culturas Cupisnique, Vicus, Tallán y Chimú.</p>
+                                <p class="source">Dr. César Astuhuamán, citando la investigación compartida en 1992 por Luis Chaparro y Antonio Murga.</p>
+                            </div>
+                            <div class="page-number">4</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Página 3 (Front y Back) -->
+                    <div class="page" id="page3">
+                        <div class="page-front">
+                            <div class="page-content">
+                                <h3>Disputa legal</h3>
+                                <p>Sin embargo, la incalculable importancia de estas ruinas se ve amenazada por un prolongado litigio. Actualmente, las tierras de la Huaca el Bosque se encuentran en una disputa legal por las 6 hectáreas del predio, en un juicio activo.</p>
+                                <div class="page-image">
+                                    <img src="https://images.unsplash.com/photo-1581091870634-2c5f65d48d21?auto=format&fit=crop&w=2070&q=80" alt="Disputa legal">
+                                    <div class="image-caption">Documentos relacionados con la disputa legal</div>
+                                </div>
+                                <p>El punto de quiebre ocurrió en el año 2005, cuando Manayay afirmó ser el propietario del predio basándose en un certificado de transferencia que, según argumenta, fue firmado el 17 de agosto de ese año por Emiliano Quispe, quien fungía como presidente de la Comunidad Campesina de Castilla. Este caso, publicado por Diario El Comercio, sentó las bases para el conflicto que persiste hasta hoy.</p>
+                            </div>
+                            <div class="page-number">5</div>
+                        </div>
+                        <div class="page-back">
+                            <div class="page-content">
+                                <h3>Proyecto de saneamiento</h3>
+                                <p>Frente a este panorama, la gestión pública ha tomado cartas en el asunto, buscando revertir la situación con una visión de futuro.</p>
+                                <p>El Director Regional de Comercio Exterior y Turismo, Leonardo Rosas, está al frente de un proyecto de saneamiento físico legal junto al Dr. Astuhuamán, asesor principal, en coordinación con la Dirección Desconcentrada de Cultura de Piura. Su objetivo principal es asegurar legalmente el predio para convertir el sitio en un motor de desarrollo cultural y económico.</p>
+                                <div class="page-image">
+                                    <img src="https://images.unsplash.com/photo-1522205408450-add114ad53fe?auto=format&fit=crop&w=2070&q=80" alt="Leonardo Rosas">
+                                    <div class="image-caption">Leonardo Rosas, Director de DIRCETUR</div>
+                                </div>
+                                <blockquote style="background-color: #f5f5f5; padding: 15px; border-left: 4px solid #2c5530; margin: 20px 0;">
+                                    "Sabemos que el primer paso para cualquier proyecto de inversión es el saneamiento físico legal. Estamos utilizando trazos, planos, y vuelos de drone para elaborar ortofotos y delimitar con precisión la Huaca. Nuestra visión no es solo proteger, sino revalorizar la zona."
+                                </blockquote>
+                                <p class="source">Leonardo Rosas (Director DIRCETUR)</p>
+                            </div>
+                            <div class="page-number">6</div>
+                        </div>
+                    </div>
+                    
+                    <!-- Página 4 (Front y Back) -->
+                    <div class="page" id="page4">
+                        <div class="page-front">
+                            <div class="page-content">
+                                <h3>Museo de Sitio Arqueológico</h3>
+                                <p>La propuesta de Rosas es ambiciosa: desarrollar un Museo de Sitio Arqueológico en la Huaca El Bosque. Este proyecto no solo cumpliría una función de revalorización cultural y social para los habitantes de Castilla y Piura, sino que también aseguraría el uso de función arqueológica del predio.</p>
+                                <div class="page-image">
+                                    <img src="https://images.unsplash.com/photo-1530124566582-a618bc2615dc?auto=format&fit=crop&w=2070&q=80" alt="Proyecto de museo">
+                                    <div class="image-caption">Maqueta del proyecto de museo de sitio</div>
+                                </div>
+                                <p>Un museo de sitio permitiría continuar las excavaciones, cateos e investigaciones, garantizando la protección del área y ofreciendo a Piura el primer museo arqueológico dentro de su zona urbana.</p>
+                            </div>
+                            <div class="page-number">7</div>
+                        </div>
+                        <div class="page-back">
+                            <div class="page-content">
+                                <h3>Obstáculos legales</h3>
+                                <p>Ya en 2014, un primer intento de saneamiento fisico legal, expuesto en el Informe N°063-2014 SCR-ZR N°I-UREG/SUNARP emitido por el área de catastro zona registral Piura de SUNARP, indica que existe una superposición de partidas registrales en la zona arqueológica, ya que esta figuraba inscrita por la Cooperativa de Vivienda El Bosque LDTA, misma que llevó a cabo el proyecto urbanístico de la urbanización El Bosque en 1984.</p>
+                                <div class="page-image">
+                                    <img src="https://images.unsplash.com/photo-1558981033-99f0b6d9f33e?auto=format&fit=crop&w=2070&q=80" alt="Documentos legales">
+                                    <div class="image-caption">Documentación legal sobre la superposición de partidas</div>
+                                </div>
+                                <p>Esto obstaculizaría un saneamiento propiamente dicho del predio, y significaría un retraso en los planes del Gobierno Regional y Dirección Desconcentrada de Cultura.</p>
+                                <p class="source">Extraído de Informe N°1740-2014-DSFLA-DGPA/MC propiedad del MINCUL.</p>
+                            </div>
+                            <div class="page-number">8</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="book-controls">
+                    <button class="book-nav" id="prev-page" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="page-indicator" id="page-indicator">Página 1 de 4</div>
+                    <button class="book-nav" id="next-page">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
                 </div>
             </div>
         </div>
@@ -1071,7 +1339,7 @@
                     <h3>Enlaces Rápidos</h3>
                     <ul style="list-style: none;">
                         <li><a href="#inicio" style="color: white; text-decoration: none;">Inicio</a></li>
-                        <li><a href="#reportaje" style="color: white; text-decoration: none;">Reportaje</a></li>
+                        <li><a href="#cronologia" style="color: white; text-decoration: none;">Cronología</a></li>
                         <li><a href="#comic" style="color: white; text-decoration: none;">Cómic Educativo</a></li>
                         <li><a href="#expertos" style="color: white; text-decoration: none;">Voces Expertas</a></li>
                         <li><a href="#galeria" style="color: white; text-decoration: none;">Galería</a></li>
@@ -1200,6 +1468,81 @@
                             top: targetElement.offsetTop - 80,
                             behavior: 'smooth'
                         });
+                    }
+                });
+            });
+            
+            // Funcionalidad del libro interactivo
+            const openBookBtn = document.getElementById('open-book');
+            const bookContainer = document.getElementById('book-container');
+            const magazineContainer = document.querySelector('.magazine-container');
+            const prevPageBtn = document.getElementById('prev-page');
+            const nextPageBtn = document.getElementById('next-page');
+            const pageIndicator = document.getElementById('page-indicator');
+            const pages = document.querySelectorAll('.page');
+            
+            let currentPage = 0;
+            const totalPages = pages.length;
+            
+            // Abrir el libro
+            openBookBtn.addEventListener('click', function(e) {
+                e.preventDefault();
+                magazineContainer.style.display = 'none';
+                bookContainer.style.display = 'block';
+                updatePageIndicator();
+            });
+            
+            // Navegación del libro
+            prevPageBtn.addEventListener('click', function() {
+                if (currentPage > 0) {
+                    pages[currentPage].classList.remove('flipped');
+                    currentPage--;
+                    updatePageIndicator();
+                }
+            });
+            
+            nextPageBtn.addEventListener('click', function() {
+                if (currentPage < totalPages - 1) {
+                    currentPage++;
+                    pages[currentPage].classList.add('flipped');
+                    updatePageIndicator();
+                }
+            });
+            
+            // Actualizar indicador de página y estado de botones
+            function updatePageIndicator() {
+                pageIndicator.textContent = `Página ${currentPage + 1} de ${totalPages}`;
+                
+                // Actualizar estado de los botones
+                prevPageBtn.disabled = currentPage === 0;
+                nextPageBtn.disabled = currentPage === totalPages - 1;
+            }
+            
+            // Permitir hacer clic en las páginas para voltearlas
+            pages.forEach((page, index) => {
+                page.addEventListener('click', function(e) {
+                    // Solo voltear si se hace clic en la mitad derecha de la página frontal
+                    // o en la mitad izquierda de la página trasera
+                    const rect = this.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const width = rect.width;
+                    
+                    if (index === currentPage) {
+                        if (x > width / 2 && !this.classList.contains('flipped')) {
+                            // Voltear hacia adelante
+                            if (currentPage < totalPages - 1) {
+                                currentPage++;
+                                pages[currentPage].classList.add('flipped');
+                                updatePageIndicator();
+                            }
+                        } else if (x < width / 2 && this.classList.contains('flipped')) {
+                            // Voltear hacia atrás
+                            if (currentPage > 0) {
+                                pages[currentPage].classList.remove('flipped');
+                                currentPage--;
+                                updatePageIndicator();
+                            }
+                        }
                     }
                 });
             });
