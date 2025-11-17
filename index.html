@@ -666,7 +666,7 @@
         .book {
             position: relative;
             width: 100%;
-            height: 500px;
+            height: 600px;
             transform-style: preserve-3d;
             transition: transform 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
@@ -721,6 +721,7 @@
         .page-content {
             flex: 1;
             padding: 10px 0;
+            overflow-y: auto;
         }
 
         .page-image {
@@ -818,7 +819,7 @@
             }
 
             .book {
-                height: 600px;
+                height: 700px;
             }
         }
     </style>
@@ -1095,19 +1096,8 @@
             <h2>Reportaje "Guerra por el patrimonio"</h2>
             <p>Explora nuestra edición especial dedicada al patrimonio cultural y la conservación.</p>
             
-            <div class="magazine-container">
-                <div class="magazine-cover">
-                    <img src="https://via.placeholder.com/300x400/2c5530/ffffff?text=REVISTA+MIRADA+ALTERNA" alt="Guerra por el patrimonio">
-                </div>
-                <div class="magazine-info">
-                    <h3>Edición Especial: Guerra por el patrimonio</h3>
-                    <p>Esta edición presenta un análisis profundo sobre los desafíos que enfrentan los sitios arqueológicos en el Perú contemporáneo, con un enfoque especial en La Huaca del Bosque.</p>
-                    <a href="#" class="btn" id="open-book">Leer reportaje</a>
-                </div>
-            </div>
-            
             <!-- Libro interactivo para el reportaje -->
-            <div class="book-container" id="book-container" style="display: none;">
+            <div class="book-container" id="book-container">
                 <div class="book" id="book">
                     <!-- Página 1 (Front y Back) -->
                     <div class="page" id="page1">
@@ -1473,9 +1463,6 @@
             });
             
             // Funcionalidad del libro interactivo
-            const openBookBtn = document.getElementById('open-book');
-            const bookContainer = document.getElementById('book-container');
-            const magazineContainer = document.querySelector('.magazine-container');
             const prevPageBtn = document.getElementById('prev-page');
             const nextPageBtn = document.getElementById('next-page');
             const pageIndicator = document.getElementById('page-indicator');
@@ -1483,14 +1470,6 @@
             
             let currentPage = 0;
             const totalPages = pages.length;
-            
-            // Abrir el libro
-            openBookBtn.addEventListener('click', function(e) {
-                e.preventDefault();
-                magazineContainer.style.display = 'none';
-                bookContainer.style.display = 'block';
-                updatePageIndicator();
-            });
             
             // Navegación del libro
             prevPageBtn.addEventListener('click', function() {
@@ -1546,6 +1525,9 @@
                     }
                 });
             });
+            
+            // Inicializar el libro
+            updatePageIndicator();
         });
     </script>
 </body>
