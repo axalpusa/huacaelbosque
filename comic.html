@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Comic</title>
+<style>
+  body {
+    margin: 0;
+    background: radial-gradient(circle at 50% 20%, #1a2238, #0b0f19 70%);
+    font-family: 'Inter', Arial, sans-serif;
+    color: #e5e7eb;
+    overflow-x: hidden;
+  }
+
+  /* ≡ MENÚ LATERAL MINIATURAS */
+  .sidebar {
+    position: fixed;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    z-index: 20;
+  }
+
+  .thumb {
+    width: 65px;
+    height: 95px;
+    border-radius: 8px;
+    overflow: hidden;
+    cursor: pointer;
+    opacity: 0.7;
+    transition: 0.2s;
+    border: 2px solid rgba(255,255,255,0.1);
+  }
+
+  .thumb:hover {
+    opacity: 1;
+    transform: scale(1.08);
+    border-color: rgba(255,200,0,0.6);
+  }
+
+  /* HEADER */
+  header {
+    text-align: center;
+    padding: 28px;
+    background: rgba(17, 24, 39, 0.75);
+    backdrop-filter: blur(8px);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.45);
+  }
+
+  .container {
+    width: 100%;
+    max-width: 900px;
+    margin: 20px auto;
+    padding: 10px;
+  }
+
+  /* PÁGINAS — SCROLL ANIM */
+  .comic-page {
+    width: 100%;
+    border-radius: 16px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(40px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.55);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+
+  .comic-page.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  img { width: 100%; display: block; cursor: zoom-in; }
+
+  /* ZOOM MODAL */
+  .zoom-modal {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: rgba(0,0,0,0.85);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    z-index: 50;
+  }
+
+  .zoom-modal img {
+    width: 90%;
+    max-width: 1200px;
+    border-radius: 12px;
+    cursor: zoom-out;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+  }
+</style>
+</head>
+<body>
+
+<!-- MINIATURAS LATERALES -->
+<div class="sidebar">
+  <img class="thumb" src="PORTADA.jpeg" onclick="scrollToPage(1)">
+  <img class="thumb" src="CARA1.jpeg" onclick="scrollToPage(2)">
+  <img class="thumb" src="CARA2.jpeg" onclick="scrollToPage(3)">
+  <img class="thumb" src="CARA3.jpeg" onclick="scrollToPage(4)">
+  <img class="thumb" src="CARA4.jpeg" onclick="scrollToPage(5)">
+  <img class="thumb" src="CONTRAPORTADA.jpeg" onclick="scrollToPage(6)">
+</div>
+
+<header>
+  <h1>Comic — Visor Scroll Premium</h1>
+  <p>Desliza y navega con miniaturas — Haz clic para zoom</p>
+</header>
+
+<div class="container">
+  <div class="comic-page" id="p1"><img src="PORTADA.jpeg"></div>
+  <div class="comic-page" id="p2"><img src="CARA1.jpeg"></div>
+  <div class="comic-page" id="p3"><img src="CARA2.jpeg"></div>
+  <div class="comic-page" id="p4"><img src="CARA3.jpeg"></div>
+  <div class="comic-page" id="p5"><img src="CARA4.jpeg"></div>
+  <div class="comic-page" id="p6"><img src="CONTRAPORTADA.jpeg"></div>
+</div>
+
+<!-- MODAL ZOOM -->
+<div class="zoom-modal" id="zoomModal" onclick="closeZoom()">
+  <img id="zoomImg" src="">
+</div>
+
+<script>
+// MINIATURA → SCROLL A PAGINA
+function scrollToPage(num) {
+  document.getElementById(`p${num}`).scrollIntoView({ behavior: 'smooth' });
+}
+
+// ANIMACIÓN AL HACER SCROLL
+const observer = new IntersectionObserver(entries => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('show');
+    }
+  });
+}, { threshold: 0.2 });
+
+document.querySelectorAll('.comic-page').forEach(page => observer.observe(page));
+
+// ZOOM AL HACER CLICK
+const modal = document.getElementById('zoomModal');
+const zoomImg = document.getElementById('zoomImg');
+
+document.querySelectorAll('.comic-page img').forEach(img => {
+  img.addEventListener('click', () => {
+    zoomImg.src = img.src;
+    modal.style.display = 'flex';
+  });
+});
+
+function closeZoom() {
+  modal.style.display = 'none';
+}
+</script>
+
+</body>
+</html>
