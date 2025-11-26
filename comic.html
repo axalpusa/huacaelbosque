@@ -100,6 +100,21 @@
     cursor: zoom-out;
     box-shadow: 0 0 20px rgba(255,255,255,0.2);
   }
+  /* ZOOM CON SCROLL */
+  .zoom-modal img {
+    width: auto;
+    height: auto;
+    max-width: none;
+    max-height: none;
+  }
+
+  .zoom-modal {
+    overflow: auto;
+    cursor: grab;
+  }
+  .zoom-modal:active {
+    cursor: grabbing;
+  }
 </style>
 </head>
 <body>
@@ -168,3 +183,4 @@ function closeZoom() {
 
 </body>
 </html>
+
