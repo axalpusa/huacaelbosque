@@ -1943,13 +1943,9 @@
             const now = new Date();
             const timeLeft = targetDate - now;
             
-            console.log("Fecha objetivo:", targetDate);
-            console.log("Ahora:", now);
-            console.log("Tiempo restante (ms):", timeLeft);
             
             // Si ya pasó la fecha, mostrar la galería
             if (timeLeft <= 0) {
-                console.log("¡La fecha ya pasó! Mostrando galería...");
                 const countdownSection = document.getElementById('countdown-section');
                 const gallerySection = document.getElementById('galeria');
                 
@@ -1976,7 +1972,6 @@
             const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
             
-            console.log(`Faltan: ${days}d ${hours}h ${minutes}m ${seconds}s`);
             
             // Actualizar la cuenta regresiva en la página
             const daysElement = document.getElementById('days');
