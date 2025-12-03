@@ -1668,38 +1668,54 @@
         </div>
     </section>
 
-    <!-- Extractos del Cómic Educativo -->
-    <section id="comic" class="comic-extracts">
-        <div class="container">
-            <h2>El cómic</h2>
-            <p>"La Huaca, una tierra lastimada" es un cómic que revela la historia olvidada de la Huaca El Bosque de Castilla. A través de la mirada de una joven periodista y de los especialistas que han luchado por protegerla, durante la historia se muestran hallazgos arqueológicos, documentos quemados, abandono institucional y una lucha que continúa 39 años después de su declaratoria como Patrimonio Cultural de la Nación.</p>
+   <!-- Extractos del Cómic Educativo -->
+<section id="comic" class="comic-extracts">
+    <div class="container">
+        <h2>El cómic</h2>
+        <p>"La Huaca, una tierra lastimada" es un cómic que revela la historia olvidada de la Huaca El Bosque de Castilla. A través de la mirada de una joven periodista y de los especialistas que han luchado por protegerla, durante la historia se muestran hallazgos arqueológicos, documentos quemados, abandono institucional y una lucha que continúa 39 años después de su declaratoria como Patrimonio Cultural de la Nación.</p>
+        
+        <div class="comic-slider">
+            <button class="slider-arrow prev"><i class="fas fa-chevron-left"></i></button>
+            <button class="slider-arrow next"><i class="fas fa-chevron-right"></i></button>
             
-            <div class="comic-slider">
-                <button class="slider-arrow prev"><i class="fas fa-chevron-left"></i></button>
-                <button class="slider-arrow next"><i class="fas fa-chevron-right"></i></button>
-                
-                <div class="comic-slides">
-                    <div class="comic-slide">
-                        <img src="PORTADA.jpeg" alt="Extracto cómic 1">
-                        <div class="slide-caption">Los orígenes de La Huaca del Bosque - Portada</div>
+            <div class="comic-slides">
+                <div class="comic-slide">
+                    <div class="image-placeholder" style="height: 400px;">
+                        <i class="fas fa-book-open" style="font-size: 4rem;"></i>
+                        <span style="font-size: 1.2rem; margin-top: 20px;">Portada del Cómic</span>
+                        <p style="margin-top: 10px;">"La Huaca, una tierra lastimada"</p>
                     </div>
-                    <div class="comic-slide">
-                        <img src="CARA1.jpeg" alt="Extracto cómic 2">
-                        <div class="slide-caption">El descubrimiento arqueológico - Página 1</div>
+                    <div class="slide-caption">Los orígenes de La Huaca del Bosque - Portada</div>
+                </div>
+                <div class="comic-slide">
+                    <div class="image-placeholder" style="height: 400px;">
+                        <i class="fas fa-scroll" style="font-size: 4rem;"></i>
+                        <span style="font-size: 1.2rem; margin-top: 20px;">Página 1 del Cómic</span>
+                        <p style="margin-top: 10px;">El descubrimiento arqueológico</p>
                     </div>
-                    
+                    <div class="slide-caption">El descubrimiento arqueológico - Página 1</div>
                 </div>
-                
-                <div class="slider-nav">
-                    <div class="slider-dot active"></div>
-                    <div class="slider-dot"></div>
+                <div class="comic-slide">
+                    <div class="image-placeholder" style="height: 400px;">
+                        <i class="fas fa-exclamation-triangle" style="font-size: 4rem;"></i>
+                        <span style="font-size: 1.2rem; margin-top: 20px;">Página 2 del Cómic</span>
+                        <p style="margin-top: 10px;">La lucha por la protección</p>
+                    </div>
+                    <div class="slide-caption">La batalla legal - Página 2</div>
                 </div>
-                 <a href="comic.html" class="reportaje-link" target="_blank">
-                        <i class="fas fa-external-link-alt"></i> Leer cómic completo
-                    </a>
             </div>
+            
+            <div class="slider-nav">
+                <div class="slider-dot active"></div>
+                <div class="slider-dot"></div>
+                <div class="slider-dot"></div>
+            </div>
+            <a href="comic.html" class="reportaje-link" target="_blank" style="display: inline-block; margin-top: 20px;">
+                <i class="fas fa-external-link-alt"></i> Leer cómic completo
+            </a>
         </div>
-    </section>
+    </div>
+</section>
 
     <!-- Sección de cuenta regresiva para la galería -->
     <section id="countdown-section">
@@ -2062,37 +2078,40 @@
                 }
             });
             
-            // Cuenta regresiva para la galería - CORREGIDA
-            function updateCountdown() {
-                // Fecha objetivo: 15 de diciembre de 2025 a las 16:00
-                const targetDate = new Date('December 5, 2025 16:00:00').getTime();
-                const now = new Date().getTime();
-                const timeLeft = targetDate - now;
-                
-                // Si ya pasó la fecha, mostrar la galería
-                if (timeLeft <= 0) {
-                    document.getElementById('countdown-section').style.display = 'none';
-                    document.getElementById('galeria').classList.remove('gallery-hidden');
-                    document.getElementById('galeria').classList.add('gallery-visible');
-                    return;
-                }
-                
-                // Calcular días, horas, minutos y segundos
-                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
-                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
-                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
-                
-                // Actualizar la cuenta regresiva en la página
-                document.getElementById('days').textContent = days.toString().padStart(2, '0');
-                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
-                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
-                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
-            }
-            
-            // Actualizar la cuenta regresiva cada segundo
-            setInterval(updateCountdown, 1000);
-            updateCountdown(); // Llamar inmediatamente para evitar retraso inicial
+// Cuenta regresiva para la galería - CORREGIDA
+function updateCountdown() {
+    // Fecha objetivo CORREGIDA: 5 de diciembre de 2025 a las 16:00
+    const targetDate = new Date('December 5, 2025 16:00:00 GMT-0500').getTime();
+    const now = new Date().getTime();
+    const timeLeft = targetDate - now;
+    
+    // Si ya pasó la fecha, mostrar la galería
+    if (timeLeft <= 0) {
+        document.getElementById('countdown-section').style.display = 'none';
+        document.getElementById('galeria').classList.remove('gallery-hidden');
+        document.getElementById('galeria').classList.add('gallery-visible');
+        
+        // Detener la cuenta regresiva
+        clearInterval(countdownInterval);
+        return;
+    }
+    
+    // Calcular días, horas, minutos y segundos
+    const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+    const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+    
+    // Actualizar la cuenta regresiva en la página
+    document.getElementById('days').textContent = days.toString().padStart(2, '0');
+    document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+    document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+    document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+}
+
+// Actualizar la cuenta regresiva cada segundo
+const countdownInterval = setInterval(updateCountdown, 1000);
+updateCountdown(); // Llamar inmediatamente para evitar retraso inicial
             
             // Mejora: Añadir efecto de carga suave para las imágenes
                 const images = document.querySelectorAll('img');
