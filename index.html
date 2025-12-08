@@ -1228,7 +1228,62 @@
             font-size: 1.1rem;
             line-height: 1.7;
         }
+.video-player {
+    max-width: 800px;
+    margin: 0 auto;
+    background: #000;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
 
+.video-player video {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+.video-controls-custom {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background: rgba(0,0,0,0.8);
+    color: white;
+    gap: 10px;
+}
+
+.control-btn {
+    background: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.video-thumbnails {
+    display: flex;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.video-thumb {
+    width: 120px;
+    cursor: pointer;
+    border: 3px solid transparent;
+    border-radius: 5px;
+    overflow: hidden;
+}
+
+.video-thumb.active {
+    border-color: #4CAF50;
+}
+
+.video-thumb video {
+    width: 100%;
+    height: 80px;
+    object-fit: cover;
+}
         .juego-button {
             display: inline-block;
             background: #2c5530;
