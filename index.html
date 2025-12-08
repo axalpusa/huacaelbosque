@@ -1753,27 +1753,47 @@
                     </a>
                 </div>
             </div>
-            
-            <!-- Galería de comparación -->
-            <div class="comparison-main">
-                <div class="comparison-image before" id="before-image"></div>
-                <div class="comparison-image after" id="after-image"></div>
-                <input type="range" min="0" max="100" value="50" class="slider" id="comparison-slider">
-                <div class="slider-button" id="slider-button">
-                    <i class="fas fa-arrows-left-right"></i>
-                </div>
-            </div>
-            
-            <div class="gallery-thumbnails">
-                <div class="thumbnail active" data-before="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" data-after="https://images.unsplash.com/photo-1464822759849-e0dee9f0d781?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80">
-                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" alt="Antes">
-                </div>
-                <div class="thumbnail" data-before="https://images.unsplash.com/photo-1544551763-46a013bb70d5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80" data-after="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80">
-                    <img src="https://images.unsplash.com/photo-1519681393784-d120267933ba?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80" alt="Después 2">
-                </div>
-            </div>
         </div>
     </section>
+
+      <section id="experiencia" class="comparison-section gallery-hidden">
+        <div class="container">
+            <h2>Experiencia fisica</h2>
+            
+            <!-- Reportaje con nueva estructura -->
+            <div class="video-player">
+    <video id="main-video" controls autoplay muted loop>
+        <source src="experiencia.mp4" type="video/mp4">
+        Tu navegador no soporta videos HTML5.
+    </video>
+    
+    <div class="video-controls-custom">
+        <button class="control-btn" id="play-btn">
+            <i class="fas fa-play"></i>
+        </button>
+        <button class="control-btn" id="pause-btn">
+            <i class="fas fa-pause"></i>
+        </button>
+        <input type="range" id="volume-slider" min="0" max="1" step="0.1" value="1">
+        <span class="time-display">
+            <span id="current-time">0:00</span> / <span id="duration">0:00</span>
+        </span>
+    </div>
+</div>
+
+<!-- Miniaturas para seleccionar diferentes videos -->
+<div class="video-thumbnails">
+    <div class="video-thumb active" data-video="video1.mp4">
+        <video muted loop>
+            <source src="video1.mp4" type="video/mp4">
+        </video>
+        <span>Video 1</span>
+    </div>
+</div>
+        </div>
+    </section>
+
+
 
     <!-- Sección del Juego -->
     <section id="juego" class="juego-section">
@@ -1886,7 +1906,7 @@
                 <div class="footer-section">
                     <h3>La Huaca del Bosque</h3>
                     <p>Un proyecto dedicado a la preservación del patrimonio cultural y la concientización sobre su importancia.</p>
-                </div>
+                </div> 
                 
                 <div class="footer-section">
                     <h3>Enlaces Rápidos</h3>
