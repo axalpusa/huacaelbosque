@@ -407,6 +407,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
 
         .timeline-image:hover {
@@ -520,11 +521,11 @@
         }
 
         .video-wrapper {
-            max-width: 1000px;
+            max-width: 1200px;
             margin: 40px auto 0;
             border-radius: 12px;
             overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.3);
         }
 
         .vimeo-container {
@@ -541,6 +542,79 @@
             width: 100%;
             height: 100%;
             border: 0;
+        }
+
+        /* Modal para imágenes en grande */
+        .image-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.9);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .image-modal.active {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-image-container {
+            max-width: 90%;
+            max-height: 90%;
+            position: relative;
+        }
+
+        .modal-image {
+            width: 100%;
+            height: auto;
+            max-height: 80vh;
+            object-fit: contain;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        .close-modal-btn {
+            position: absolute;
+            top: -40px;
+            right: 0;
+            background: #2c5530;
+            color: white;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+
+        .close-modal-btn:hover {
+            background: #1e3a23;
+        }
+
+        .modal-caption {
+            position: absolute;
+            bottom: -40px;
+            left: 0;
+            right: 0;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-size: 1rem;
         }
 
         /* Galería Before-and-After mejorada */
@@ -1356,6 +1430,17 @@
     </style>
 </head>
 <body>
+    <!-- Modal para imágenes en grande -->
+    <div class="image-modal" id="imageModal">
+        <div class="modal-image-container">
+            <button class="close-modal-btn" id="closeModalBtn">
+                <i class="fas fa-times"></i>
+            </button>
+            <img class="modal-image" id="modalImage" src="" alt="">
+            <div class="modal-caption" id="modalCaption"></div>
+        </div>
+    </div>
+
     <!-- Navegación  -->
     <nav id="navbar">
         <div class="container">
@@ -1373,7 +1458,7 @@
             </ul>
             <div class="social-links">
                 <!-- X (Twitter) con SVG -->
-                <a href="https://x.com/wakaolvidada?s=11" target="_blank" title="x">
+                <a href="https://x.com/wakaolvidada?s=11" target="_blank" title="X (Twitter)">
                     <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                         <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                     </svg>
@@ -1425,7 +1510,7 @@
     <!-- NUEVA CRONOLOGÍA MEJORADA -->
     <section id="cronologia" class="timeline-section">
         <div class="container">
-            <h2>La cronología del descubrimiento y conflicto</h2>
+            <h2>Cronología del descubrimiento y conflicto</h2>
             <p class="section-subtitle">Un recorrido histórico interactivo por los hitos más relevantes de la Huaca El Bosque, desde su reconocimiento patrimonial hasta las amenazas actuales.</p>
 
             <div class="timeline-container">
@@ -1444,7 +1529,7 @@
                         <i class="fas fa-file-contract"></i>
                     </div>
                     <div class="timeline-image">
-                        <img src="1986.png" alt="Registro de propiedad 1986">
+                        <img src="1986.png" alt="Registro de propiedad 1986" data-caption="Documento de registro oficial">
                         <div class="timeline-caption">Documento de registro oficial</div>
                     </div>
                 </div>
@@ -1464,7 +1549,7 @@
                         <i class="fas fa-scroll"></i>
                     </div>
                     <div class="timeline-image">
-                        <img src="1993.png" alt="Resolución de Patrimonio">
+                        <img src="1993.png" alt="Resolución de Patrimonio" data-caption="Declaración oficial de patrimonio">
                         <div class="timeline-caption">Declaración oficial de patrimonio</div>
                     </div>
                 </div>
@@ -1484,7 +1569,7 @@
                         <i class="fas fa-gavel"></i>
                     </div>
                     <div class="timeline-image">
-                        <img src="2005.png" alt="Disputa de propiedad">
+                        <img src="2005.png" alt="Disputa de propiedad" data-caption="Inicio del conflicto legal">
                         <div class="timeline-caption">Inicio del conflicto legal</div>
                     </div>
                 </div>
@@ -1504,7 +1589,7 @@
                         <i class="fas fa-balance-scale"></i>
                     </div>
                     <div class="timeline-image">
-                        <img src="2013.png" alt="Demanda judicial">
+                        <img src="2013.png" alt="Demanda judicial" data-caption="Proceso legal de protección">
                         <div class="timeline-caption">Proceso legal de protección</div>
                     </div>
                 </div>
@@ -1653,7 +1738,7 @@
     <!-- SECCIÓN DEL VIDEO DE VIMEO -->
     <section id="video" class="video-section">
         <div class="container">
-            <h2> Experiencia fisica: Huaca el Bosque </h2>
+            <h2>Experiencia física: Huaca el Bosque</h2>
             <p class="section-subtitle">Presentamos nuestro proyecto transmedia a la comunidad, quienes interactuaron con nuestros contenidos y descubrieron nueva información sobre su patrimonio local.</p>
             <div class="video-wrapper">
                 <div class="youtube-container">
@@ -1705,7 +1790,7 @@
     <!-- Reportaje con tarjetas -->
     <section id="reportaje" class="reportaje-section">
         <div class="container">
-            <h2>Reportaje: Guerra por el patrimonio </h2>
+            <h2>Reportaje: Guerra por el patrimonio</h2>
             <p class="section-subtitle">Un recorrido por la lucha por la conservación de La Huaca el Bosque, el último vestigio arqueológico en el casco urbano de Piura</p>
             
             <!-- Reportaje con nueva estructura -->
@@ -1731,7 +1816,7 @@
     <section id="creditos" class="light-bg">
         <div class="container">
             <h2>Créditos y personajes de relevancia</h2>
-            <p>Reconocimiento a las personas que, desde sus cargos institucionales, han contribuido a la investigación y preservación de  Huaca el Bosque.</p>
+            <p>Reconocimiento a las personas que, desde sus cargos institucionales, han contribuido a la investigación y preservación de Huaca el Bosque.</p>
             
             <div class="credits-grid">
                 <div class="credit-card">
@@ -1752,18 +1837,18 @@
                 
                 <div class="credit-card">
                     <div class="credit-photo">
-                        <img src="Leonardo_Rosas_Vallebueno.png" alt="Leonardo Rosas Vallebuona ">
+                        <img src="Leonardo_Rosas_Vallebueno.png" alt="Leonardo Rosas Vallebuona">
                     </div>
-                    <h3>Leonardo Rosas Vallebuona </h3>
-                    <p>Director regional </p>
+                    <h3>Leonardo Rosas Vallebuona</h3>
+                    <p>Director regional</p>
                 </div>
                 
                 <div class="credit-card">
                     <div class="credit-photo">
-                        <img src="Luis_Chaparro_Frias.png" alt="Luis Chaparro Frias ">
+                        <img src="Luis_Chaparro_Frias.png" alt="Luis Chaparro Frías">
                     </div>
-                    <h3>Luis Chaparro Frias </h3>
-                    <p>Antropologo y arqueologo </p>
+                    <h3>Luis Chaparro Frías</h3>
+                    <p>Antropólogo y arqueólogo</p>
                 </div>
 
                 <div class="credit-card">
@@ -1771,7 +1856,7 @@
                         <img src="César_Carlos_Pacherrez_Aquino.png" alt="César Carlos Pacherrez Aquino">
                     </div>
                     <h3>César Carlos Pacherrez Aquino</h3>
-                    <p>Sub gerente de fiscalización</p>
+                    <p>Subgerente de fiscalización</p>
                 </div>
             </div>
         </div>
@@ -1801,7 +1886,7 @@
                     <h3>Síguenos en</h3>
                     <div class="social-links">
                         <!-- X (Twitter) con SVG -->
-                        <a href="https://x.com/wakaolvidada?s=11" target="_blank" title="x">
+                        <a href="https://x.com/wakaolvidada?s=11" target="_blank" title="X (Twitter)">
                             <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
                                 <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
                             </svg>
@@ -1827,7 +1912,60 @@
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // ============================================
-            // RESTO DEL CÓDIGO JAVASCRIPT
+            // FUNCIONALIDAD PARA VER IMÁGENES EN GRANDE
+            // ============================================
+            
+            const imageModal = document.getElementById('imageModal');
+            const modalImage = document.getElementById('modalImage');
+            const modalCaption = document.getElementById('modalCaption');
+            const closeModalBtn = document.getElementById('closeModalBtn');
+            
+            // Seleccionar todas las imágenes de la línea de tiempo
+            const timelineImages = document.querySelectorAll('.timeline-image img');
+            
+            // Agregar evento click a cada imagen
+            timelineImages.forEach(img => {
+                img.addEventListener('click', function() {
+                    // Obtener la imagen original y su descripción
+                    const imgSrc = this.src;
+                    const imgAlt = this.alt;
+                    const caption = this.getAttribute('data-caption') || this.alt;
+                    
+                    // Mostrar la imagen en el modal
+                    modalImage.src = imgSrc;
+                    modalImage.alt = imgAlt;
+                    modalCaption.textContent = caption;
+                    
+                    // Mostrar el modal
+                    imageModal.classList.add('active');
+                    document.body.style.overflow = 'hidden'; // Prevenir scroll
+                });
+            });
+            
+            // Cerrar modal al hacer clic en el botón
+            closeModalBtn.addEventListener('click', function() {
+                imageModal.classList.remove('active');
+                document.body.style.overflow = 'auto'; // Restaurar scroll
+            });
+            
+            // Cerrar modal al hacer clic fuera de la imagen
+            imageModal.addEventListener('click', function(e) {
+                if (e.target === imageModal) {
+                    imageModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // Cerrar modal con tecla ESC
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && imageModal.classList.contains('active')) {
+                    imageModal.classList.remove('active');
+                    document.body.style.overflow = 'auto';
+                }
+            });
+            
+            // ============================================
+            // RESTO DEL CÓDIGO JAVASCRIPT EXISTENTE
             // ============================================
             
             // Animación de la nueva cronología
