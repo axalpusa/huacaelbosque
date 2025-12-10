@@ -380,7 +380,22 @@
             z-index: 3;
             box-shadow: 0 3px 10px rgba(0,0,0,0.2);
         }
+.youtube-container {
+    position: relative;
+    padding-bottom: 56.25%; /* 16:9 ratio */
+    height: 0;
+    overflow: hidden;
+    max-width: 100%;
+}
 
+.youtube-container iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border: 0;
+}
         .timeline-image {
             width: 45%;
             border-radius: 10px;
@@ -1638,13 +1653,12 @@
     <!-- SECCIÓN DEL VIDEO DE VIMEO -->
     <section id="video" class="video-section">
         <div class="container">
-            <h2>Video documental: La Huaca el Bosque</h2>
-            <p class="section-subtitle">Un recorrido visual por el estado actual de este patrimonio cultural y la lucha por su preservación</p>
-            
+            <h2> Experiencia fisica: Huaca el Bosque </h2>
+            <p class="section-subtitle">Presentamos nuestro proyecto transmedia a la comunidad, quienes interactuaron con nuestros contenidos y descubrieron nueva información sobre su patrimonio local.</p>
             <div class="video-wrapper">
                 <div class="youtube-container">
                     <iframe 
-                        src="https://www.youtube.com/embed/14XfCtlZeK4"
+                        src="https://www.youtube.com/embed/14XfCtlZeK4?autoplay=0&rel=0&modestbranding=1"
                         frameborder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowfullscreen
